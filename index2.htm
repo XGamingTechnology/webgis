@@ -1,0 +1,234 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Construction</title>
+
+    <link rel="apple-touch-icon" sizes="76x76" href="img/favicon-76.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="img/favicon-120.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="img/favicon-152.png" />
+    <link rel="icon" sizes="196x196" href="img/favicon-196.png" />
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
+
+    <link rel="stylesheet" href="css/bootstrap.3.3.5.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
+    <link rel="stylesheet" href="css/bootstrap-toggle.min.css" />
+    <link rel="stylesheet" href="css/bootstrap-slider.css" />
+    <link rel="stylesheet" href="css/leaflet-sidebar.css" />
+    <link rel="stylesheet" href="css/radio.css" />
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+
+  <body>
+    <div id="mapContainer"></div>
+
+    <div class="bgheader"></div>
+
+    <div class="logoHeader"><img src="img/wk.png" class="logoImage" /> <span class="logoText">Construction Data GIS</span></div>
+
+    <div class="searchBox">
+      <div class="form-group has-feedback">
+        <input id="searchbox" type="text" placeholder="Search" class="form-control" />
+        <span id="searchicon" class="fa fa-search form-control-feedback"></span>
+      </div>
+    </div>
+
+    <div id="sidebar" class="leaflet-sidebar collapsed">
+      <!-- nav tabs -->
+      <div class="leaflet-sidebar-tabs">
+        <!-- top aligned tabs -->
+        <ul role="tablist">
+          <li>
+            <a href="#projects" role="tab"><i class="fas fa-grip-horizontal active ipad-top"></i></a>
+          </li>
+          <li>
+            <a href="#home" role="tab"><i class="fas fa-layer-group ipad-top"></i></a>
+          </li>
+          <li>
+            <a href="#legend" role="tab"><i class="fas fa-info-circle ipad-top"></i></a>
+          </li>
+          <li>
+            <a href="#search" role="tab"><i class="fas fa-search ipad-top"></i></a>
+          </li>
+          <li>
+            <a href="#analysis" role="tab"><i class="fas fa-chart-bar ipad-top"></i></a>
+          </li>
+          <li>
+            <a href="#share" role="tab"><i class="fas fa-share-alt ipad-top"></i></a>
+          </li>
+        </ul>
+
+        <!-- bottom aligned tabs -->
+        <!-- <ul role="tablist">
+                    <li><a href="https://github.com/nickpeihl/leaflet-sidebar-v2"><i class="fa fa-github ipad-top"></i></a></li>
+                </ul> -->
+      </div>
+
+      <!-- panel content -->
+      <div class="leaflet-sidebar-content">
+        <div class="leaflet-sidebar-pane" id="projects">
+          <h1 class="leaflet-sidebar-header">
+            Projects
+            <span class="leaflet-sidebar-close"><i class="fa fa-caret-left ipad-top"></i></span>
+          </h1>
+          <br />
+
+          <div class="panel-group">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" href="#collapseProject2D">2D Map</a>
+                </h4>
+              </div>
+              <div id="collapseProject2D" class="panel-collapse">
+                <div id="divProjectList2D" style="padding: 15px" class="panel-body"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-group">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" href="#collapseProject3D">3D Map</a>
+                </h4>
+              </div>
+              <div id="collapseProject3D" class="panel-collapse">
+                <div class="panel-body">
+                  <div id="divProjectList3D" style="padding: 15px" class="panel-body"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="leaflet-sidebar-pane" id="home">
+          <h1 class="leaflet-sidebar-header">
+            Layer
+            <span class="leaflet-sidebar-close"><i class="fa fa-caret-left ipad-top"></i></span>
+          </h1>
+          <br />
+
+          <div class="panel-group">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" href="#collapseBasemap">Basemap</a>
+                </h4>
+              </div>
+              <div id="collapseBasemap" class="panel-collapse">
+                <div class="panel-body" id="divBaseMapMenu"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-group">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" href="#collapseLayer">Layer</a>
+                </h4>
+              </div>
+              <div id="collapseLayer" class="panel-collapse">
+                <div class="panel-body" id="panelLayerList"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="leaflet-sidebar-pane" id="legend">
+          <h1 class="leaflet-sidebar-header">
+            Legend
+            <span class="leaflet-sidebar-close"><i class="fa fa-caret-left ipad-top"></i></span>
+          </h1>
+          <br />
+          <div id="divLegend"></div>
+        </div>
+
+        <div class="leaflet-sidebar-pane" id="search">
+          <h1 class="leaflet-sidebar-header">
+            Search
+            <span class="leaflet-sidebar-close"><i class="fa fa-caret-left ipad-top"></i></span>
+          </h1>
+          <br />
+          <div id="divSearchContainer">
+            <!-- <form id="formSearch"> -->
+            <div class="form-group">
+              <input type="email" class="form-control" id="inputSearch" aria-describedby="search" placeholder="Enter search criteria" />
+            </div>
+            <button type="button" class="btn btn-primary" onclick="app.search.doSearch()">Search</button>
+            <button type="button" class="btn btn-primary" onclick="app.search.clearSearch()">Clear</button>
+            <!-- </form> -->
+          </div>
+          <br />
+          <div id="searchLoading" style="text-align: center; display: none"><img src="img/loading.gif" /></div>
+          <div id="divSearchResult"></div>
+        </div>
+
+        <div class="leaflet-sidebar-pane" id="analysis">
+          <h1 class="leaflet-sidebar-header">
+            Analysis
+            <span class="leaflet-sidebar-close"><i class="fa fa-caret-left ipad-top"></i></span>
+          </h1>
+          <br />
+          <!-- Center line analysis -->
+          <div id="divCenterLineAnalysis"></div>
+
+          <!-- Network analysis -->
+          <div id="divCenterLineAnalysis"></div>
+        </div>
+
+        <div class="leaflet-sidebar-pane" id="share">
+          <h1 class="leaflet-sidebar-header">
+            Share
+            <span class="leaflet-sidebar-close"><i class="fa fa-caret-left ipad-top"></i></span>
+          </h1>
+
+          <br />
+          Bagikan aplikasi ini dengan salin alamat dibawah
+          <div class="input-group mb-3" style="width: 100%">
+            <input type="text" class="form-control" readonly id="txtURL" />
+          </div>
+        </div>
+
+        <!-- <div class="leaflet-sidebar-pane" id="messages">
+                    <h1 class="leaflet-sidebar-header">Messages<span class="leaflet-sidebar-close"><i class="fa fa-caret-left ipad-top"></i></span></h1>
+                </div> -->
+      </div>
+    </div>
+
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Promise"></script>
+
+    <script src="js/jquery/jquery-2.1.4.min.js"></script>
+    <script src="js/bootstrap3.3.5.min.js"></script>
+    <script src="js/bootstrap-slider.js"></script>
+    <script src="js/typeahead.bundle.min.js"></script>
+    <script src="js/handlebars.min.js"></script>
+    <script src="js/list.min.js"></script>
+    <script src="js/bootstrap-toggle.min.js"></script>
+
+    <script type="text/javascript" include="leaflet.markercluster" src="js/leaflet/include-leaflet.js"></script>
+    <script type="text/javascript" src="js/leaflet/plugin/leaflet-sidebar.js"></script>
+    <script type="text/javascript" src="js/leaflet/plugin/leaflet-hash.js"></script>
+
+    <script type="text/javascript" src="js/leaflet/plugin/leaflet-bing-layer.js"></script>
+    <script type="text/javascript" src="js/leaflet/plugin/esri-leaflet.js"></script>
+
+    <!-- <script src="assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script> -->
+
+    <script type="text/javascript" src="js/layers.js"></script>
+    <script type="text/javascript" src="js/util.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/search.js"></script>
+
+    <script>
+      app.initMap("mapContainer");
+    </script>
+  </body>
+</html>
